@@ -1,0 +1,159 @@
+#chart_div {
+  margin-top: 40px;
+  width: 100%;
+  chart-div: 100%;
+}
+.listItem {
+  padding-bottom: 4px;
+}
+.listItem .item_details {
+  font-weight: 300;
+  margin-top: 0.7em;
+}
+.listItem a {
+  color: gray;
+  text-decoration: none;
+}
+.listItem a:hover {
+  color: orangered;
+  font-weight: 500;
+  text-decoration: none;
+}
+.listItem .runnables {
+  font-size: 0.9em;
+}
+.listItem .content {
+  padding-bottom: 3px;
+}
+.itemImg {
+  width: 200px;
+  float: right;
+}
+.typeImg {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  background-size: 100% auto;
+  border-radius: 10px;
+  /* When cateogry is filtered, breadcrumb shows category text that includes image. hide the image*/
+}
+.typeImg .attrib {
+  width: 13px;
+  height: 13px;
+  margin-top: 1px;
+  margin-left: 2px;
+  float: right;
+}
+.typeImg .filtercrumbs {
+  display: none;
+}
+.typeImg .filter_item {
+  display: none;
+  font-size: 0.8em;
+}
+.mainTextSearch > input {
+  width: 250px;
+  margin: 0 0 0 10px !important;
+}
+.viewExternal {
+  font-size: 0.7em;
+  vertical-align: top;
+  margin-left: 5px;
+  margin-top: 4px;
+}
+.title {
+  font-size: 0.9em;
+  color: black;
+}
+.detail {
+  font-size: 0.8em;
+}
+.detail > .header {
+  padding-left: 0;
+  font-weight: bold;
+}
+.detail > .subheader {
+  padding-left: 0;
+}
+.detail > .listelement {
+  padding-left: 1em;
+}
+.externallink {
+  margin-left: 5px;
+  vertical-align: middle;
+  color: black;
+}
+.info_box {
+  position: relative;
+  margin: 0 10px 0 10px;
+  text-align: left;
+  height: 250px;
+}
+.info_box .info_box_title {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0 10px 0;
+  border-bottom: solid grey medium;
+}
+.info_box .info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.info_box .project {
+  font-size: 0.8em;
+  margin: 5px 0 5px 0;
+}
+.info_box .project_executing_organisation {
+  font-size: 0.8em;
+  margin: 5px 0 5px 0;
+}
+.info_box .title {
+  font-weight: bold;
+  padding-right: 10px;
+  display: table-cell;
+  width: 30%;
+  text-align: left;
+  left: 0;
+}
+.info_box .value {
+  line-break: auto;
+  width: 70%;
+  right: 0;
+  display: table-cell;
+}
+.info_box .footer {
+  bottom: 15px;
+  position: absolute;
+  font-size: 0.8em;
+}
+.error {
+  color: red;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.error-text {
+  color: red;
+  margin-left: 5px;
+  font-size: 0.9em;
+  vertical-align: bottom;
+}
+.runnable-separator {
+  padding: 0 3px 0 5px;
+}
+.endpoint-copy-symbol {
+  margin: 0 3px 0 10px;
+}
+.fa-cubes::before {
+  margin-right: 3px;
+}
+.subdetailvalue {
+  color: #5d4f22;
+}
+.subdetail {
+  padding-left: 1em;
+}
+.subdetail .subheader {
+  color: #5d4f22;
+  font-weight: bold;
+}

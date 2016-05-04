@@ -1,0 +1,193 @@
+//@titleColor : #615c6c;
+@titleColor: black;
+@errorColor: red;
+@endpointcolor: #5d4f22;
+
+#chart_div {
+  margin-top: 40px;
+  width: 100%;
+  chart-div: 100%;
+
+}
+
+.listItem {
+  padding-bottom: 4px;
+  .item_details {
+    font-weight: 300;
+    margin-top: 0.7em;
+  }
+  a {
+    &:hover {
+      color: orangered;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    color: gray;
+    text-decoration: none;
+  }
+  .runnables {
+    font-size: 0.9em;
+
+  }
+  .content {
+    padding-bottom: 3px;
+  }
+}
+
+.itemImg {
+  width: 200px;
+  float: right;
+}
+
+.typeImg {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  background-size: 100% auto;
+  border-radius: 10px;
+  .attrib {
+    width: 13px;
+    height: 13px;
+    margin-top: 1px;
+    margin-left: 2px;
+    float: right;
+  }
+
+  .filtercrumbs {
+    display: none;
+  }
+  /* When cateogry is filtered, breadcrumb shows category text that includes image. hide the image*/
+  .filter_item {
+    display: none;
+    font-size: 0.8em;
+  }
+}
+
+.mainTextSearch > input {
+  width: 250px;
+  margin: 0 0 0 10px !important;
+}
+
+.viewExternal {
+  font-size: 0.7em;
+  vertical-align: top;
+  margin-left: 5px;
+  margin-top: 4px;
+}
+
+.title {
+  font-size: 0.9em;
+  color: @titleColor;
+}
+
+.detail {
+  font-size: 0.8em;
+  > .header {
+    padding-left: 0;
+    font-weight: bold;
+  }
+  > .subheader {
+    padding-left: 0;
+  }
+  > .listelement {
+    padding-left: 1em;
+
+  }
+
+}
+
+.externallink {
+  margin-left: 5px;
+  vertical-align: middle;
+  color: @titleColor;
+
+}
+
+.info_box {
+  .info_box_title {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+    border-bottom: solid grey medium;
+  }
+  position: relative;
+
+  margin: 0 10px 0 10px;
+  text-align: left;
+  height: 250px;
+  .info {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .project {
+    font-size: 0.8em;
+    margin: 5px 0 5px 0;
+  }
+  .project_executing_organisation {
+    font-size: 0.8em;
+    margin: 5px 0 5px 0;
+
+  }
+  .title {
+    font-weight: bold;
+    padding-right: 10px;
+    display: table-cell;
+    width: 30%;
+    text-align: left;
+    left: 0;
+
+  }
+  .value {
+    line-break: auto;
+    width: 70%;
+    right: 0;
+    display: table-cell;
+
+  }
+  .footer {
+    bottom: 15px;
+    position: absolute;
+    font-size: 0.8em;
+  }
+
+}
+
+.error {
+  color: @errorColor;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.error-text {
+  color: @errorColor;
+  margin-left: 5px;
+  font-size: 0.9em;
+  vertical-align: bottom;
+}
+
+.runnable-separator {
+  padding: 0 3px 0 5px;
+}
+
+.endpoint-copy-symbol {
+  margin: 0 3px 0 10px;
+}
+
+.fa-cubes::before {
+  margin-right: 3px;
+}
+
+.subdetailvalue{
+  color: @endpointcolor;
+}
+
+.subdetail{
+  padding-left: 1em;
+  .subheader{
+    color:@endpointcolor;
+    font-weight: bold;
+  }
+
+}
+
