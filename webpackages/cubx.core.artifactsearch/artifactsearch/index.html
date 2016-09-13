@@ -6,15 +6,17 @@
         <meta charset="utf-8">
         <script>
             window.cubx = {
-                "CRCInit": {
-                    "rootDependencies": [
-                        "this/artifactsearch/main"
+                CRCInit: {
+                    rootDependencies: [
+                        {
+                            artifactId: 'artifactsearch'
+                        }
                     ]
                 }
             }
         </script>
-        <script src="../../cubx.core.rte@1.8.0/webcomponents/webcomponents-lite.js" ></script>
-        <script src="../../cubx.core.rte@1.8.0/crc-loader/js/main.js" data-CRCInit.loadCIF="false" data-crc-main="js/main.js"></script>
+        <script src="../../cubx.core.rte@2.0.1/webcomponents-lite/webcomponents-lite.js" ></script>
+        <script src="../../cubx.core.rte@2.0.1/crc-loader/js/main.js" data-CRCInit.loadCIF="false" ></script>
 
     </head>
     <body>

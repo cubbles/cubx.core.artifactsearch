@@ -38,6 +38,8 @@ function app ($, kshf, d3) {
                     dataTable.license = content.license;
                     dataTable.contributors = content.contributors;
                     dataTable.endpoints = content.endpoints;
+                    dataTable.resources = content.resources;
+                    dataTable.dependencies = content.dependencies;
                     dataTable.webpackageRunnables = content.webpackageRunnables;
                     dataTable.artifactRunnables = content.artifactRunnables;
                     dataTable.id = dataTable.webpackageId + '/' + dataTable.artifactId;
@@ -256,14 +258,14 @@ function app ($, kshf, d3) {
               }
               title += '<div class="runnables">';
               title += '<span class="runnable-separator">&#160;</span>' +
-                '<a class="fa fa-cubes externallink" target="' +
+                '<a class="fa fa-cubes externallink link" target="' +
                 d.data + '" href="../../' + d.data.webpackageId + '" >manifest</a>';
 
               if (d.data.webpackageRunnables) {
                 for (var wRunnable in d.data.webpackageRunnables) {
                   title +=
                     '<span class="runnable-separator">&#124;</span>' +
-                    '<a class="fa fa-external-link externallink" target="' +
+                    '<a class="fa fa-external-link externallink link" target="' +
                     d.data + '" href="../../' + d.data.webpackageId +
                     d.data.webpackageRunnables[ wRunnable ].path + '" title="' +
                     d.data.webpackageRunnables[ wRunnable ].description + '">' +
@@ -274,7 +276,7 @@ function app ($, kshf, d3) {
                 for (var aRunnable in d.data.artifactRunnables) {
                   title +=
                     '<span class="runnable-separator">&#124;</span>' +
-                    '<a class="fa fa-external-link externallink" target="' +
+                    '<a class="fa fa-external-link externallink link" target="' +
                     d.data + '" href="../../' + d.data.webpackageId + '/' + d.data.artifactId +
                     d.data.artifactRunnables[ aRunnable ].path + '" title="' +
                     d.data.artifactRunnables[ aRunnable ].description + '">' +
@@ -284,7 +286,12 @@ function app ($, kshf, d3) {
               title += '</div>';
               item = title;
               content = '<div class="item_details">';
-              content += '<div class="detail type">';
+              content += '<div>';
+              if (!d.data.endpoints) {
+                content += getCopyLink(d.data.groupId, d.data.name, d.data.version, d.data.artifactId);
+              }
+              content += '</div>';
+              content += '<div class="detail">';
               content += '<span class="header">Type: </span>';
               content += '<span class="value">' + getArtifactTypeText(d.data.artifactType) + '</span>';
               content += '</div>';
@@ -339,7 +346,7 @@ function app ($, kshf, d3) {
                 content += '<span class="value">';
 
                 content += d.data.author.name;
-                content += ' <a href = "mailto:' + d.data.author.email + '"> (E - Mail) </a> ';
+                content += ' <a class="link" href = "mailto:' + d.data.author.email + '"> (E - Mail) </a> ';
                 if (d.data.author.url) {
                   content += ' < a  href = "' +
                     d.data.author.url + '" >(Url)</a>';
@@ -359,7 +366,7 @@ function app ($, kshf, d3) {
                   }
 
                   content += d.data.contributors[ i ].name;
-                  content += ' <a href = "mailto:' +
+                  content += ' <a class="link" href = "mailto:' +
                     d.data.contributors[ i ].email + '"> (E - Mail) </a> ';
                   if (d.data.contributors[ i ].url) {
                     content += ' <a href = "' + d.data.contributors[ i ].url + '" >(Url)</a>';
@@ -378,6 +385,8 @@ function app ($, kshf, d3) {
                 content += '</span>';
                 content += '</div>';
               }
+
+
               if (d.data.endpoints) {
                 for (var endpoint in d.data.endpoints) {
                   content += '<div class="detail">';
@@ -387,13 +396,9 @@ function app ($, kshf, d3) {
                   content += '<span class="header">Endpoint "' +
                     d.data.endpoints[ endpoint ].endpointId + '"</span>';
 
-                  var endpointRef = buildId(d.data.groupId, d.data.name, d.data.version,
-                      d.data.artifactId) + '/' + d.data.endpoints[ endpoint ].endpointId;
-                  content += '<a href="#" class="fa fa-files-o endpoint-copy-symbol" ' +
-                    'onclick="copyTextToClipboard(\'' + endpointRef +
-                    '\');event.preventDefault()" ' +
-                    'title="copy endpoint reference for usage as dependency"></a>';
-                  // content += '</span>';
+                  content += '</div>';
+                  content += '<div class="subdetail">';
+                  content += getCopyLink(d.data.groupId, d.data.name, d.data.version, d.data.artifactId, d.data.endpoints[ endpoint ].endpointId);
                   content += '</div>';
                   if (notEmptyData(d.data.endpoints[ endpoint ].description)) {
                     content += '<div class="detail description subdetail">';
@@ -405,28 +410,31 @@ function app ($, kshf, d3) {
                   if (d.data.endpoints[ endpoint ].resources) {
                     content += '<div class="detail resources subdetail">';
                     content += '<span class="subheader">Resources: </span>';
-                    for (var res = 0; res < d.data.endpoints[ endpoint ].resources.length; res++) {
-                      content += '<div class="value listelement subdetailvalue">';
-
-                      content += formatResource(d.data.endpoints[ endpoint ].resources[ res ]);
-                      content += '</div>';
-                    }
+                    content += getResourcesContent(d.data.endpoints[ endpoint ].resources);
                     content += '</div>';
                   }
                   if (d.data.endpoints[ endpoint ].dependencies) {
                     content += '<div class="detail dependencies subdetail">';
                     content += '<span class="subheader">Dependencies: </span>';
-                    for (var dep = 0; dep < d.data.endpoints[ endpoint ].dependencies.length; dep++) {
-                      content += '<div class="value listelement subdetailvalue">';
-                      content += formatDependency(d.data.endpoints[ endpoint ].dependencies[ dep ]);
-                      content += '</div>';
-                    }
-
+                    content += getDependencyContent(d.data.endpoints[ endpoint ].dependencies);
                     content += '</div>';
                   }
                 }
               }
 
+              if (d.data.resources) {
+                content += '<div class="detail resources">';
+                content += '<span class="header">Resources: </span>';
+
+                content += getResourcesContent(d.data.resources);
+                content += '</div>';
+              }
+              if (d.data.dependencies) {
+                content += '<div class="detail dependencies">';
+                content += '<span class="header">Dependencies: </span>';
+                content += getDependencyContent(d.data.dependencies);
+                content += '</div>';
+              }
               content += '</div>';
               item += content;
 
@@ -449,39 +457,82 @@ function app ($, kshf, d3) {
     }
   );
 
-  function formatDependency (dependency) {
-    var retvalue;
-
-    if (typeof dependency === 'string') {
-      retvalue = dependency;
-    } else if (dependency.id) {
-      retvalue = dependency.id;
-    } else {
-      retvalue = dependency.groupId ? dependency.groupId : '';
-      if (retvalue.length !== 0) {
-        retvalue += '.';
-      }
-      retvalue += dependency.name ? dependency.name : '';
-      if (retvalue.length !== 0) {
-        retvalue += '-';
-      }
-      retvalue += dependency.version ? dependency.version : '';
+  function getCopyLink (groupId, name, version, artifactId, endpointId) {
+    var resContent;
+    var ref = {};
+    ref.webpackageId = buildWebpackageId(groupId, name, version);
+    ref.artifactId = artifactId;
+    if (endpointId) {
+      ref.endpointId = endpointId;
     }
-    return retvalue;
+    var refStr = encodeURI(JSON.stringify(ref, null, 2));
+    console.log(refStr);
+    resContent = refStr;
+
+    resContent = '<a href="#" class="fa fa-files-o copy-symbol" ' +
+      'onclick="copyTextToClipboard(\'' + refStr + '\');event.preventDefault()" ' +
+      'title="copy as a dependency"> copy as a dependency</a>';
+    return resContent;
+  }
+
+  function getResourcesContent (resources) {
+    var resContent = '';
+
+    for (var res = 0; res < resources.length; res++) {
+      resContent += '<div class="value listelement subdetailvalue">';
+      resContent += formatResource(resources[ res ]);
+      resContent += '</div>';
+    }
+    return resContent;
+  }
+
+  function getDependencyContent (depencies) {
+    var resContent = '';
+
+    for (var dep = 0; dep < depencies.length; dep++) {
+      resContent += '<div class="value listelement subdetailvalue">';
+      resContent += formatDependency(depencies[ dep ]);
+      resContent += '</div>';
+    }
+    return resContent;
+  }
+
+  function formatDependency (dependency) {
+    var formattedDependency;
+    if (typeof dependency === 'string') {
+      formattedDependency = dependency;
+    } else if (dependency.id) {
+      formattedDependency = dependency.id;
+    } else if (dependency.artifactId) {
+      formattedDependency = dependency.webpackageId ? dependency.webpackageId + '/' : '';
+      formattedDependency += dependency.artifactId;
+      formattedDependency = dependency.endpointId ? formattedDependency + '/' + dependency.endpointId : formattedDependency;
+    } else {
+      formattedDependency = dependency.groupId ? dependency.groupId : '';
+      if (formattedDependency.length !== 0) {
+        formattedDependency += '.';
+      }
+      formattedDependency += dependency.name ? dependency.name : '';
+      if (formattedDependency.length !== 0) {
+        formattedDependency += '-';
+      }
+      formattedDependency += dependency.version ? dependency.version : '';
+    }
+    return formattedDependency;
   }
 
   function formatResource (resource) {
-    var retvalue;
+    var formattedResource;
     if (typeof resource === 'string') {
-      retvalue = resource;
+      formattedResource = resource;
     } else {
-      retvalue = resource.prod ? resource.prod + '(prod)' : '';
-      if (retvalue.length !== 0) {
-        retvalue += ' oder ';
+      formattedResource = resource.prod ? resource.prod + '(prod)' : '';
+      if (formattedResource.length !== 0) {
+        formattedResource += ' oder ';
       }
-      retvalue += resource.dev ? resource.dev + '(dev)' : '';
+      formattedResource += resource.dev ? resource.dev + '(dev)' : '';
     }
-    return retvalue;
+    return formattedResource;
   }
 
   function getArtifactTypeText (type) {
@@ -517,7 +568,8 @@ function app ($, kshf, d3) {
 
   window.show = show;
 
-  function copyTextToClipboard (text) {
+  function copyTextToClipboard (encodedText) {
+    var text = decodeURI(encodedText);
     var textArea = document.createElement('textarea');
 
     //
@@ -576,14 +628,19 @@ function app ($, kshf, d3) {
 
   window.copyTextToClipboard = copyTextToClipboard;
   function buildId (groupId, name, version, artifactId) {
+    var id = buildWebpackageId(groupId, name, version);
+    id += '/' + artifactId;
+
+    return id;
+  }
+
+  function buildWebpackageId (groupId, name, version) {
     var id = '';
     if (groupId && groupId.length > 0) {
       id = groupId + '.';
     }
     id += name;
     id += '@' + version;
-    id += '/' + artifactId;
-
     return id;
   }
 }

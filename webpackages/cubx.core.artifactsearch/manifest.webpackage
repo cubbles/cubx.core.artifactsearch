@@ -1,60 +1,65 @@
 {
-    "name": "artifactsearch",
-    "groupId": "cubx.core",
-    "version": "1.5.0",
-    "modelVersion": "8.3.0",
-    "docType": "webpackage",
-    "description" : "ArifactSearch Client Application based on keshif.",
-    "author": {
-        "name": "Judit Ross",
-        "email": "judit.ross@incowia.com"
+  "name": "artifactsearch",
+  "groupId": "cubx.core",
+  "version": "1.6.0",
+  "modelVersion": "9.1.0",
+  "docType": "webpackage",
+  "description": "ArifactSearch Client Application based on keshif.",
+  "author": {
+    "name": "Judit Ross",
+    "email": "judit.ross@incowia.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "platform",
+    "cubixx"
+  ],
+  "man": [],
+  "runnables": [
+    {
+      "name": "readme",
+      "path": "/doc/readme.html",
+      "description": "artifactsearch readme"
     },
-    "license": "MIT",
-    "keywords": [
-        "platform",
-        "cubixx"
-    ],
-    "man": [],
-    "runnables": [
-        {
-            "name": "readme",
-            "path": "/doc/readme.html",
-            "description": "artifactsearch readme"
-        },
-        {
-            "name": "releases",
-            "path": "/doc/releases.html",
-            "description": "artifactsearch releases"
-        }
-    ],
-    "artifacts": {
-        "apps": [
-            {
-                "artifactId": "artifactsearch",
-                "runnables": [
-                    {
-                        "name": "artifactsearch",
-                        "path": "/index.html",
-                        "description": "artifactsearch application"
-                    }
-                ],
-                "endpoints": [
-                    {
-                        "endpointId": "main",
-                        "resources": [
-                            "js/app.js",
-                            "style/main.css",
-                            "style/vendor/style.css"
-                        ],
-                        "dependencies": [
-                            "d3-3.5.3@1.0.0/d3/main",
-                            "font-awesome-4.3.0@1.0.0/font-awesome/main",
-                            "jquery-1.11.1@1.0.0/jquery/main",
-                            "keshif@1.0.0/keshif/main"
-                        ]
-                    }
-                ]
-            }
-        ]
+    {
+      "name": "releases",
+      "path": "/doc/releases.html",
+      "description": "artifactsearch releases"
     }
+  ],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "artifactsearch",
+        "runnables": [
+          {
+            "name": "artifactsearch",
+            "path": "/index.html",
+            "description": "artifactsearch application"
+          }
+        ],
+        "resources": [
+          "app.html"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "d3-3.5.3@1.1.0",
+            "artifactId": "d3"
+          },
+          {
+            "webpackageId": "font-awesome-4.3.0@1.1.0",
+            "artifactId": "font-awesome"
+          },
+          {
+            "webpackageId": "jquery-1.11.1@1.1.0",
+            "artifactId": "jquery"
+          },
+          {
+            "webpackageId": "keshif@1.1.1",
+            "artifactId": "keshif"
+          }
+        ]
+      }
+    ]
+  }
 }
