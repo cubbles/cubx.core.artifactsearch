@@ -1,7 +1,7 @@
 {
   "name": "artifactsearch",
   "groupId": "cubx.core",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "modelVersion": "9.1.0",
   "docType": "webpackage",
   "description": "ArifactSearch Client Application based on keshif.",

@@ -263,24 +263,28 @@ function app ($, kshf, d3) {
 
               if (d.data.webpackageRunnables) {
                 for (var wRunnable in d.data.webpackageRunnables) {
-                  title +=
-                    '<span class="runnable-separator">&#124;</span>' +
-                    '<a class="fa fa-external-link externallink link" target="' +
-                    d.data + '" href="../../' + d.data.webpackageId +
-                    d.data.webpackageRunnables[ wRunnable ].path + '" title="' +
-                    d.data.webpackageRunnables[ wRunnable ].description + '">' +
-                    d.data.webpackageRunnables[ wRunnable ].name + '</a>';
+                  if (d.data.webpackageRunnables.hasOwnProperty(wRunnable)) {
+                    title +=
+                      '<span class="runnable-separator">&#124;</span>' +
+                      '<a class="fa fa-external-link externallink link" target="' +
+                      d.data + '" href="../../' + d.data.webpackageId +
+                      d.data.webpackageRunnables[ wRunnable ].path + '" title="' +
+                      d.data.webpackageRunnables[ wRunnable ].description + '">' +
+                      d.data.webpackageRunnables[ wRunnable ].name + '</a>';
+                  }
                 }
               }
               if (d.data.artifactRunnables) {
                 for (var aRunnable in d.data.artifactRunnables) {
-                  title +=
-                    '<span class="runnable-separator">&#124;</span>' +
-                    '<a class="fa fa-external-link externallink link" target="' +
-                    d.data + '" href="../../' + d.data.webpackageId + '/' + d.data.artifactId +
-                    d.data.artifactRunnables[ aRunnable ].path + '" title="' +
-                    d.data.artifactRunnables[ aRunnable ].description + '">' +
-                    d.data.artifactRunnables[ aRunnable ].name + '</a>';
+                  if (d.data.artifactRunnables.hasOwnProperty(aRunnable)) {
+                    title +=
+                      '<span class="runnable-separator">&#124;</span>' +
+                      '<a class="fa fa-external-link externallink link" target="' +
+                      d.data + '" href="../../' + d.data.webpackageId + '/' + d.data.artifactId +
+                      d.data.artifactRunnables[ aRunnable ].path + '" title="' +
+                      d.data.artifactRunnables[ aRunnable ].description + '">' +
+                      d.data.artifactRunnables[ aRunnable ].name + '</a>';
+                  }
                 }
               }
               title += '</div>';
@@ -385,7 +389,6 @@ function app ($, kshf, d3) {
                 content += '</span>';
                 content += '</div>';
               }
-
 
               if (d.data.endpoints) {
                 for (var endpoint in d.data.endpoints) {
